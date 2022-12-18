@@ -1,13 +1,8 @@
-from itertools import count
-from typing import Optional
-
 from flask import Flask, request, jsonify
 from flask_pydantic_spec import (
     FlaskPydanticSpec, Response, Request
 )
-from pydantic import BaseModel, Field
-from tinydb import TinyDB, Query
-from tinydb.storages import MemoryStorage
+from tinydb import Query
 from model.modelMessage import Message
 from model.modelMessagesList import Messages
 from model.ModelQuery import QueryMessage, QueryUpdate
@@ -16,7 +11,6 @@ from database.database import database
 server = Flask(__name__)
 spec = FlaskPydanticSpec('flask', title='RestStone')
 spec.register(server)
-
 
 
 @server.get('/Messages') 
@@ -83,4 +77,4 @@ def deleta_Message(id):
     return jsonify({})
 
 
-server.run()
+server.run(host="0.0.0.0")
