@@ -58,16 +58,15 @@ def InsertMessage():
     return body
 
 
-@server.put('/messages/<string:text>')
+@server.put('/messages/<int:id>')
 @spec.validate(
-    query=QueryUpdate,
-    body=Request(MessageOut), resp=Response(HTTP_201=MessageOut)
+    body=Request(MessageIn), resp=Response(HTTP_201=MessageOut)
 )
-def UpdateMessage(text):
+def UpdateMessage(id):
     """Alter an Message in Database."""
     Message = Query()
     body = request.context.body.dict()
-    database.update(body, Message.text == text)
+    database.update(body, Message.id == id)
     return jsonify(body)
 
 

@@ -9,4 +9,4 @@ class QueryMessage(BaseModel):
 
 
 class QueryUpdate(BaseModel):
-    id: Optional[int]
+    id: int
