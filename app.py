@@ -53,6 +53,7 @@ def InsertMessage():
         return {'message': 'Message alredy exists!'}, 402
     body = request.context.body.dict()
     body['id'] = len(count)
+    body['vote'] = 0
     database.insert(body)
     return body
 
