@@ -3,10 +3,10 @@ from flask_pydantic_spec import (
     FlaskPydanticSpec, Response, Request
 )
 from tinydb import Query
-from model.modelMessage import Message
-from model.modelMessagesList import Messages
-from model.ModelQuery import QueryMessage, QueryUpdate
-from database.database import database
+from api.model.modelMessage import Message
+from api.model.modelMessagesList import Messages
+from api.model.ModelQuery import QueryMessage, QueryUpdate
+from api.schema.database import database
 
 server = Flask(__name__)
 spec = FlaskPydanticSpec('flask', title='RestStone')
@@ -77,4 +77,4 @@ def deleta_Message(id):
     return jsonify({})
 
 
-server.run(host="0.0.0.0")
+server.run(host="0.0.0.0",port=1234)
