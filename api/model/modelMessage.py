@@ -7,7 +7,7 @@ c = count()
 
 
 class MessageOut(BaseModel):
-    id: Optional[int] = Field(default_factory=lambda: next(c))
+    id: Optional[int] 
     text: str
     votes: Optional[int] = 0
 

@@ -48,9 +48,11 @@ def SearchMessagesById(id):
 )
 def InsertMessage():
     """Add an Message ."""
+    count = database.all()
     if(database.search(Query().text == request.context.body.text)):
         return {'message': 'Message alredy exists!'}, 402
     body = request.context.body.dict()
+    body['id'] = len(count)
     database.insert(body)
     return body
 
@@ -74,6 +76,8 @@ def DeleteMessage(id):
     """Remove an Message of Database."""
     database.remove(Query().id == id)
     return jsonify({})
+
+
 
 
 server.run(host="0.0.0.0",port=1234 , debug=True)
