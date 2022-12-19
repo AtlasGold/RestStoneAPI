@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify
 from flask_pydantic_spec import (
     FlaskPydanticSpec, Response, Request
 )
-from tinydb import Query
+from tinydb import Query, where
+from tinydb.operations import increment
 from api.model.modelMessage import MessageOut, MessageIn
 from api.model.modelMessagesList import Messages
 from api.model.ModelQuery import QueryMessage, QueryUpdate
@@ -53,7 +54,7 @@ def InsertMessage():
         return {'message': 'Message alredy exists!'}, 402
     body = request.context.body.dict()
     body['id'] = len(count)
-    body['vote'] = 0
+    body['votes'] = 0
     database.insert(body)
     return body
 
@@ -77,7 +78,14 @@ def DeleteMessage(id):
     database.remove(Query().id == id)
     return jsonify({})
 
+@server.patch('/messages/<int:id>')
+@spec.validate(
 
+)
+def Vote(id):
+    """Alter an Message in Database."""
+    database.update(increment("votes"), where('id') == id  )
+    return {'message': 'successful vote!'}, 200
 
 
 server.run(host="0.0.0.0",port=1234 , debug=True)
