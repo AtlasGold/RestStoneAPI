@@ -3,7 +3,7 @@ from flask_pydantic_spec import (
     FlaskPydanticSpec, Response, Request
 )
 from tinydb import Query
-from api.model.modelMessage import Message
+from api.model.modelMessage import MessageOut, MessageIn
 from api.model.modelMessagesList import Messages
 from api.model.ModelQuery import QueryMessage, QueryUpdate
 from api.schema.database import database
@@ -13,27 +13,27 @@ spec = FlaskPydanticSpec('flask', title='RestStone')
 spec.register(server)
 
 
-@server.get('/Messages') 
+@server.get('/messages') 
 @spec.validate(
     query=QueryMessage,
     resp=Response(HTTP_200=Messages)
 )
-def buscar_Messages():
+def SearchAllMessages():
     """Return all Messages."""
     query = request.context.query.dict(exclude_none=True)
-    todas_as_Messages = database.search(
+    all_mensages = database.search(
         Query().fragment(query)
     )
     return jsonify(
         Messages(
-            Messages=todas_as_Messages,
-            count=len(todas_as_Messages)
+            Messages=all_mensages,
+            count=len(all_mensages)
         ).dict()
     )
 
-@server.get('/Messages/<int:id>')
-@spec.validate(resp=Response(HTTP_200=Message))
-def buscar_Message(id):
+@server.get('/messages/<int:id>')
+@spec.validate(resp=Response(HTTP_200=MessageOut))
+def SearchMessagesById(id):
     """Get All Messages by Id."""
     try:
         Message = database.search(Query().id == id)[0]
@@ -42,26 +42,25 @@ def buscar_Message(id):
     return jsonify(Message)
 
 
-@server.post('/Messages')
+@server.post('/messages')
 @spec.validate(
-    body=Request(Message), resp=Response(HTTP_201=Message)
+    body=Request(MessageIn), resp=Response(HTTP_201=MessageIn)
 )
-def inserir_Message():
+def InsertMessage():
     """Add an Message ."""
     if(database.search(Query().text == request.context.body.text)):
         return {'message': 'Message alredy exists!'}, 402
     body = request.context.body.dict()
-    print(request.context.body.text)
     database.insert(body)
     return body
 
 
-@server.put('/Messages/<string:text>')
+@server.put('/messages/<string:text>')
 @spec.validate(
     query=QueryUpdate,
-    body=Request(Message), resp=Response(HTTP_201=Message)
+    body=Request(MessageOut), resp=Response(HTTP_201=MessageOut)
 )
-def altera_Message(text):
+def UpdateMessage(text):
     """Alter an Message in Database."""
     Message = Query()
     body = request.context.body.dict()
@@ -69,12 +68,12 @@ def altera_Message(text):
     return jsonify(body)
 
 
-@server.delete('/Messages/<int:id>')
+@server.delete('/messages/<int:id>')
 @spec.validate(resp=Response('HTTP_204'))
-def deleta_Message(id):
+def DeleteMessage(id):
     """Remove an Message of Database."""
     database.remove(Query().id == id)
     return jsonify({})
 
 
-server.run(host="0.0.0.0",port=1234)
+server.run(host="0.0.0.0",port=1234 , debug=True)

@@ -6,7 +6,10 @@ from itertools import count
 c = count()
 
 
-class Message(BaseModel):
+class MessageOut(BaseModel):
     id: Optional[int] = Field(default_factory=lambda: next(c))
     text: str
-    votes: int
+    votes: Optional[int] = 0
+
+class MessageIn(BaseModel):
+    text: str
