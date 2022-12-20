@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 # expose the port 
-EXPOSE 5000
+EXPOSE 1234
 
 # configure the container to run in an executed manner
 ENTRYPOINT [ "python3" ]

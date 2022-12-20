@@ -13,3 +13,6 @@ class MessageOut(BaseModel):
 
 class MessageIn(BaseModel):
     text: str
+
+class MessageRandom(BaseModel):
+    votes: Optional[int] = 0
