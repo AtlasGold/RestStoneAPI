@@ -97,8 +97,11 @@ def DeleteMessage(id):
 )
 def Vote(id):
     """Vote for the Message."""
-    database.update(increment("votes"), where('id') == id  )
-    return {'message': 'successful vote!'}, 200
-
+    Messages = database.search(Query().id == id)
+    if(len(Messages) > 0): 
+        database.update(increment("votes"), where('id') == id  )
+        return {'message': 'successful vote!'}, 200 
+    else:
+        return {'message': 'message not found'}, 404 
 
 server.run(host="0.0.0.0",port=1234 , debug=True)
