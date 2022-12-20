@@ -1,3 +1,4 @@
+import random
 from flask import Flask, request, jsonify
 from flask_pydantic_spec import (
     FlaskPydanticSpec, Response, Request
@@ -6,7 +7,7 @@ from tinydb import Query, where
 from tinydb.operations import increment
 from api.model.modelMessage import MessageOut, MessageIn
 from api.model.modelMessagesList import Messages
-from api.model.ModelQuery import QueryMessage, QueryUpdate
+from api.model.ModelQuery import QueryMessage
 from api.schema.database import database
 
 server = Flask(__name__)
@@ -42,6 +43,18 @@ def SearchMessagesById(id):
         return {'message': 'Message not found!'}, 404
     return jsonify(Message)
 
+
+@server.get('/messages/random/<int:votes>')
+@spec.validate(resp=Response(HTTP_200=MessageOut))
+def SearchMessagesByVotes(votes):
+    """Get random messages with a minimum of votes."""
+    try:
+        Message = database.search(Query().votes >= votes)
+        chosed_message = Message[random.randrange(len(Message))]
+    except ValueError:
+        return {'message': 'There are NO Messages with these number of Votes!'}, 404
+    return jsonify(chosed_message)
+        
 
 @server.post('/messages')
 @spec.validate(
