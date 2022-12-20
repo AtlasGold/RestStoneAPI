@@ -83,7 +83,7 @@ def DeleteMessage(id):
 
 )
 def Vote(id):
-    """Alter an Message in Database."""
+    """Vote for the Message."""
     database.update(increment("votes"), where('id') == id  )
     return {'message': 'successful vote!'}, 200
 
