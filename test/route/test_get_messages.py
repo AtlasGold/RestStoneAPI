@@ -95,7 +95,7 @@ def test_filter_random_messages_by_votes():
 
 def test_try_find_message_with_invalid_votes():
     """
-    Attempting to find a random message with a 
+    Attempting to find a random message with a
     minimum number of votes too large to exist.
     """
     request = get(BASE_URL + f"/random/{999999999}")
@@ -103,3 +103,16 @@ def test_try_find_message_with_invalid_votes():
     assert request.status_code == 404 and request.json() == {
         "message": "There are NO Messages with these number of Votes!"
     }
+
+def test_count_messages_are_correct():
+    """  
+    Enters five text messages and checks
+    that the count actually shows five
+    """
+    for i in range(5):
+        post(BASE_URL, json={"text": RandomText()})
+        i += 1
+    request = get(BASE_URL)
+    assert request.json()["count"] == 5
+
+    ClearDatabase()
