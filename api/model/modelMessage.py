@@ -7,12 +7,14 @@ c = count()
 
 
 class MessageOut(BaseModel):
-    id: Optional[int] 
+    id: Optional[int]
     text: str
     votes: Optional[int] = 0
 
+
 class MessageIn(BaseModel):
     text: str
+
 
 class MessageRandom(BaseModel):
     votes: Optional[int] = 0
