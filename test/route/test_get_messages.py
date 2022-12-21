@@ -94,9 +94,12 @@ def test_filter_random_messages_by_votes():
 
 
 def test_try_find_message_with_invalid_votes():
-
-    request = get(BASE_URL + f"/{999999999}")
+    """
+    Attempting to find a random message with a 
+    minimum number of votes too large to exist.
+    """
+    request = get(BASE_URL + f"/random/{999999999}")
 
     assert request.status_code == 404 and request.json() == {
-        "message": "Message not found!"
+        "message": "There are NO Messages with these number of Votes!"
     }
