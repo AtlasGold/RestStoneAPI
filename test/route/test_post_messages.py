@@ -72,12 +72,11 @@ def test_insert_empty_value():
 
 
 def test_put_more_than_expect():
-    """  
+    """
     Test to directly insert the ID and vote
-    values ​​that should be ignored by the 
+    values ​​that should be ignored by the
     API and use the default values
     """
     ClearDatabase()
     request = post(BASE_URL, json={"id": 101, "text": "Lagwagon", "votes": 99})
     assert request.json() == {"id": 0, "text": "Lagwagon", "votes": 0}
-

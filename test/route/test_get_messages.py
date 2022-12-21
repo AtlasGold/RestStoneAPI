@@ -104,8 +104,9 @@ def test_try_find_message_with_invalid_votes():
         "message": "There are NO Messages with these number of Votes!"
     }
 
+
 def test_count_messages_are_correct():
-    """  
+    """
     Enters five text messages and checks
     that the count actually shows five
     """
