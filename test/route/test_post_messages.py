@@ -8,7 +8,7 @@ def test_add_message():
     Send a simple message
     """
     request = post(BASE_URL, json={"text": "Master Of Puppets"})
-    assert request.status_code == 200 and request.json() == {
+    assert request.status_code == 201 and request.json() == {
         "id": 0,
         "text": "Master Of Puppets",
         "votes": 0,
@@ -21,7 +21,7 @@ def test_insert_repeated_message():
     """
     ClearDatabase()
     first_request = post(BASE_URL, json={"text": "Waiting Silence by Angra"})
-    assert first_request.status_code == 200 and first_request.json() == {
+    assert first_request.status_code == 201 and first_request.json() == {
         "id": 0,
         "text": "Waiting Silence by Angra",
         "votes": 0,
@@ -63,7 +63,7 @@ def test_insert_empty_value():
     request = post(BASE_URL, json={"text": ""})
     assert (
         request.json() == {"id": 0, "text": "", "votes": 0}
-        and request.status_code == 200
+        and request.status_code == 201
     )
 
     request = post(BASE_URL, json={"text": ""})
@@ -74,9 +74,20 @@ def test_insert_empty_value():
 def test_put_more_than_expect():
     """
     Test to directly insert the ID and vote
-    values ​​that should be ignored by the
+    values that should be ignored by the
     API and use the default values
     """
     ClearDatabase()
     request = post(BASE_URL, json={"id": 101, "text": "Lagwagon", "votes": 99})
     assert request.json() == {"id": 0, "text": "Lagwagon", "votes": 0}
+
+
+def test_input_with_missing_field():
+    """  
+    Performing post action with no declared value
+    """
+    request = post(BASE_URL, json={})
+    assert request.status_code == 422 and request.json() == [
+        {"loc": ["text"], "msg": "field required", "type": "value_error.missing"}
+    ]
+

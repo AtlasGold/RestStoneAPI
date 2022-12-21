@@ -53,7 +53,7 @@ def InsertMessage():
     body["id"] = len(count)
     body["votes"] = 0
     database.insert(body)
-    return body
+    return body, 201
 
 
 @server.put("/messages/<int:id>")
