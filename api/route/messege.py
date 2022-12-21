@@ -21,7 +21,7 @@ def SearchAllMessages():
 
 @server.get("/messages/<int:id>")
 @spec.validate(resp=Response(HTTP_200=MessageOut))
-def SearchMessagesById(id):
+def SearchMessagesById(id:int):
     """Get All Messages by Id."""
     try:
         Message = database.search(Query().id == id)[0]
@@ -32,7 +32,7 @@ def SearchMessagesById(id):
 
 @server.get("/messages/random/<int:votes>")
 @spec.validate(resp=Response(HTTP_200=MessageOut))
-def SearchMessagesByVotes(votes):
+def SearchMessagesByVotes(votes:int):
     """Get random messages with a minimum of votes."""
     try:
         Message = database.search(Query().votes >= votes)
@@ -58,7 +58,7 @@ def InsertMessage():
 
 @server.put("/messages/<int:id>")
 @spec.validate(body=Request(MessageIn), resp=Response(HTTP_201=MessageOut))
-def UpdateMessage(id):
+def UpdateMessage(id:int):
     """Alter an Message in Database."""
     Message = Query()
     body = request.context.body.dict()
@@ -68,7 +68,7 @@ def UpdateMessage(id):
 
 @server.delete("/messages/<int:id>")
 @spec.validate(resp=Response("HTTP_204"))
-def DeleteMessage(id):
+def DeleteMessage(id:int):
     """Remove an Message of Database."""
     database.remove(Query().id == id)
     return jsonify({})
@@ -76,7 +76,7 @@ def DeleteMessage(id):
 
 @server.patch("/messages/<int:id>")
 @spec.validate()
-def Vote(id):
+def Vote(id:int):
     """Vote for the Message."""
     Messages = database.search(Query().id == id)
     if len(Messages) > 0:
