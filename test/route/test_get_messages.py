@@ -12,6 +12,7 @@ def test_connetion_get_messages():
 
 
 def test_getting_no_messages():
+    ClearDatabase()
     """
     Test a request that should returns no value
     because the database should have been
