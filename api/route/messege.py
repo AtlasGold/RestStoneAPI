@@ -74,7 +74,7 @@ def DeleteMessage(id:int):
     if (body == []):
         return jsonify({"message":"Message Not Found"}),404
     else:
-        return jsonify({"message":"Message successfully deleted"}),200
+        return jsonify({}),204
 
 
 @server.patch("/messages/<int:id>")
