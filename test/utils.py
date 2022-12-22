@@ -23,6 +23,12 @@ def MakeVotes(votes_number: int, message_id: int):
         i += 1
 
 
+def NonexistentMessage():
+    request = get(BASE_URL)
+    response = request.json()["count"]
+    return response + 99
+
+
 def RandomChar():
     return "".join(random.choices(string.ascii_letters, k=1))
 
