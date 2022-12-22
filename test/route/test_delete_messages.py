@@ -15,7 +15,7 @@ def test_valid_deletion():
 
 def test_delete_nonexistent_message():
     """
-    Test to delete an image that does
+    Test to delete an message that does
     not exist in the database
     """
     request = delete(BASE_URL + f"{NonexistentMessage()}")
