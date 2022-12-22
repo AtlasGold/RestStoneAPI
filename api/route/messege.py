@@ -70,8 +70,11 @@ def UpdateMessage(id:int):
 @spec.validate(resp=Response("HTTP_204"))
 def DeleteMessage(id:int):
     """Remove an Message of Database."""
-    database.remove(Query().id == id)
-    return jsonify({})
+    body = database.remove(Query().id == id)
+    if (body == []):
+        return jsonify({"message":"Message Not Found"}),404
+    else:
+        return jsonify({"message":"Message successfully deleted"}),200
 
 
 @server.patch("/messages/<int:id>")
