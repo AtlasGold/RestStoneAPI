@@ -1,18 +1,19 @@
 from httpx import get, post
-from test.utils import BASE_URL, RandomText, DatabaseSize, ClearDatabase, MakeVotes
+from test.utils import BASE_URL, RandomText, ClearDatabase
 
 
 def test_add_message():
-    ClearDatabase()
     """
     Send a simple message
     """
+    ClearDatabase()
     request = post(BASE_URL, json={"text": "Master Of Puppets"})
     assert request.status_code == 201 and request.json() == {
         "id": 0,
         "text": "Master Of Puppets",
         "votes": 0,
     }
+    ClearDatabase()
 
 
 def test_insert_repeated_message():
@@ -83,11 +84,10 @@ def test_put_more_than_expect():
 
 
 def test_input_with_missing_field():
-    """  
+    """
     Performing post action with no declared value
     """
     request = post(BASE_URL, json={})
     assert request.status_code == 422 and request.json() == [
         {"loc": ["text"], "msg": "field required", "type": "value_error.missing"}
     ]
-
