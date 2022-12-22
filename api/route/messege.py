@@ -48,7 +48,7 @@ def InsertMessage():
     """Add an Message ."""
     count = database.all()
     if database.search(Query().text == request.context.body.text):
-        return {"message": "Message alredy exists!"}, 402
+        return {"message": "Message alredy exists!"}, 409
     body = request.context.body.dict()
     body["id"] = len(count)
     body["votes"] = 0
@@ -57,13 +57,19 @@ def InsertMessage():
 
 
 @server.put("/messages/<int:id>")
-@spec.validate(body=Request(MessageIn), resp=Response(HTTP_201=MessageOut))
+@spec.validate(body=Request(MessageIn), resp=Response(HTTP_200=MessageIn))
 def UpdateMessage(id:int):
     """Alter an Message in Database."""
-    Message = Query()
     body = request.context.body.dict()
-    database.update(body, Message.id == id)
-    return jsonify(body)
+    Message = database.search(Query().fragment({"id":id}))[0]
+
+    if(database.search(Query().id ==id) == []):
+        return {"message": "Message doesn't exists!"}, 404
+    elif(body["text"] == Message["text"]):
+        return {"message": "This message already has this text"}, 409
+    else:
+        database.update(body, Query().id == id)
+        return jsonify(body)
 
 
 @server.delete("/messages/<int:id>")
