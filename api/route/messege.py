@@ -13,8 +13,6 @@ from __main__ import server, spec
 
 @server.get("/messages")
 @spec.validate(query=QueryMessage, resp=Response(HTTP_200=Messages))
-@server.get("/messages")
-@spec.validate(query=QueryMessage, resp=Response(HTTP_200=Messages))
 def SearchAllMessages():
     """Return all Messages."""
     query = request.context.query.dict(exclude_none=True)
@@ -55,8 +53,7 @@ def SearchMessagesByVotes(votes: int):
 
 @server.post("/messages")
 @spec.validate(body=Request(MessageIn), resp=Response(HTTP_201=MessageIn))
-@server.post("/messages")
-@spec.validate(body=Request(MessageIn), resp=Response(HTTP_201=MessageIn))
+
 def InsertMessage():
     """Add an Message."""
     count = database.all()
