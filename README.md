@@ -21,8 +21,8 @@
 <h2 id ="about">About </h2>
  Inspired by my favorite game Dark Souls, there is an item called Soapstone that leaves messages for other players. So I decided to create RestStone
  (since it's a REST API) to leave messages for other people. Working as a CRUD, it is possible to create messages, delete, update and read. My main 
- intention was to create an API service to supply a bash script that would make it so that whenever the programmer opened the terminal a message 
- previously written by another programmer was shown, he could vote for the best messages and could choose the minimum number of votes the message 
+ intention was to create an API service to supply a bash script that would make it so that whenever the programmer opened the terminal, a message 
+ previously written by another programmer was shown, he could vote for the best messages and could choose the minimum number of votes in the message 
  needs to have in order to appear for him. This project arose from a challenge for an internship in software engineering at Hashdex
  
  <h2 id ="UML">UML Diagram </h2>
@@ -121,7 +121,7 @@ python3 app.py
 
 <h1 id="Running"> Running </h1
 <h4>📋 Prerequisites </h4>
-<h5> You must have already started the API server following the steps of running a <a href="#Docker">Docker Image 🐳</a>  or <a href="#Cloning">Cloning Repo ⬇️</a></h5>
+<h5> You must have already started the API server, following the steps of running a <a href="#Docker">Docker Image 🐳</a>  or <a href="#Cloning">Cloning Repo ⬇️</a></h5>
 
 <h4>🔧 Setup </h4>
 <h5>With the server running, you should see a similar message in your terminal </h5>
@@ -143,7 +143,7 @@ http://localhost:1234/apidoc/swagger
 <h1 id="Tests"> Tests </h1
 <h4>📋 Prerequisites </h4>
 
-<h5> You must have already started the API server following the steps of <a href="#Cloning">Cloning Repo ⬇️</a></h5>
+<h5> You must have already started the API server, following the steps of <a href="#Cloning">Cloning Repo ⬇️</a></h5>
 
 > **_NOTE:_** If you are running on Docker clone the repo and install dependencies (steps 1 to 3)
 
@@ -159,25 +159,25 @@ python3 -m pytest test
 <h3> Talking about what I think about the project and what I felt while developing it </h3>
 
 This project came as a challenge for an internship vacancy and like all my projects I want to do the best I can,
-I admit that I'm not very good but I realized that I could improve my developer skills A LOT, in this project I 
-understood the importance of unit tests, when I started writing them I realized how bad my code was and I needed
+I admit that I'm not very good, but I realized that I could improve my developer skills A LOT, in this project I 
+understood the importance of unit tests, when I started writing them I realized how bad my code was, and I needed
 to refactor a lot of things. I learned a lot about the architecture of an API in python, I only had experience
 with API development in javascript but because Hashdex uses a lot of python I decided to use python as a way to get closer
 
 <h3> Talking about Frameworks and choices </h3>
-I chose to use Flask because unlike Django, it gives me a blank canvas and I have the freedom to do it the way I imagined it.
-The database I used was TinyDB, it is not recommended for large projects but I decided to take a chance on a new database to 
-learn, database is my passion and I am very happy when I try to learn a DBMS/ORM new and I can extract at least what I needed for my project
+I chose to use Flask because, unlike Django, it gives me a blank canvas and I have the freedom to do it the way I imagined it.
+The database I used was TinyDB, it is not recommended for large projects, but I decided to take a chance on a new database to 
+learn, database is my passion, and I am very happy when I try to learn a DBMS/ORM new, and I can extract at least what I needed for my project
 
 <h3> Talking about unit testing </h3>
 I always knew the importance of unit tests, but in this project I fully understood how important they are 
-in any project, I wanted to test as much as I could of my API and I feel that it was still not enough, 
-I am delivering the project with 40 tests unit tests and I feel that they were not enough, I wish I had
+in any project, I wanted to test as much as I could have my API and I feel that it was still not enough, 
+I am delivering the project with 40 tests unit tests, and I feel that they were not enough, I wish I had
 more time to dedicate myself to creating my unit tests
 
 <h3> Talking about acquired knowledge </h3>
-During the interview the interviewer said that they use a lot of cloud like AWS in Hashdex, so I decided that my 
-API also uses such a tool, I put all my devops study into practice and managed to configure the connection of a
+During the interview, the interviewer said that they use a lot of cloud like AWS in Hashdex, so I decided that my 
+API also uses such a tool, I put all my DevOps study into practice and managed to configure the connection of a
 virtual machine to the internet. I learned a lot about HTPP codes, much more than in college, I understood in which
 situation we use each of the codes and I tried to use the best practices in my API.
 Speaking of good practices, I tried to read python articles about Best Practices when building a project in python, 
