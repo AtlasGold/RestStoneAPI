@@ -94,8 +94,11 @@ cd RestStoneAPI
 
 <h3> 3️⃣  Install Dependencies </h3>
 
+> **_NOTE:_** If you are on windows run the terminal as administrator
+
+
 ```
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 ```
 
 <h3> 4️⃣ Start the API </h3>
