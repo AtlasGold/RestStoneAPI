@@ -50,12 +50,12 @@ def test_insert():
 
     db.drop_tables()
 
-    db.insert({"int": 1, "char": "a"})
-    db.insert({"int": 1, "char": "b"})
-    db.insert({"int": 1, "char": "c"})
+    db.insert({"num": 1, "letter": "a"})
+    db.insert({"num": 1, "letter": "b"})
+    db.insert({"num": 1, "letter": "c"})
 
-    assert db.count(where("int") == 1) == 3
-    assert db.count(where("char") == "a") == 1
+    assert db.count(where("num") == 1) == 3
+    assert db.count(where("letter") == "a") == 1
 
 
 def test_insert_on_existing_db(tmpdir):
@@ -67,15 +67,15 @@ def test_insert_on_existing_db(tmpdir):
     path = str(tmpdir.join("db.json"))
 
     db = TinyDB(path, ensure_ascii=False)
-    db.insert({"foo": "bar"})
+    db.insert({"key": "value"})
 
     assert len(db) == 1
 
     db.close()
 
     db = TinyDB(path, ensure_ascii=False)
-    db.insert({"foo": "bar"})
-    db.insert({"foo": "bar"})
+    db.insert({"key": "value"})
+    db.insert({"key": "value"})
 
     assert len(db) == 3
 
