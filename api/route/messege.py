@@ -74,9 +74,6 @@ def InsertMessage():
 @server.put("/messages/<int:id>")
 @spec.validate(body=Request(MessageIn), resp=Response(HTTP_201=MessageOut))
 def UpdateMessage(id):
-@server.put("/messages/<int:id>")
-@spec.validate(body=Request(MessageIn), resp=Response(HTTP_200=MessageIn))
-def UpdateMessage(id: int):
     """Alter an Message in Database."""
     body = request.context.body.dict()
 
