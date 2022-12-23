@@ -145,7 +145,7 @@ http://localhost:1234/apidoc/swagger
 
 <h5> You must have already started the API server, following the steps of <a href="#Cloning">Cloning Repo ⬇️</a></h5>
 
-> **_NOTE:_** If you are running on Docker clone the repo and install dependencies (steps 1 to 3)
+> **_NOTE:_** If you are running on Docker clone the repo and install dependencies (steps 1 to 3).
 
           
 <h4 id="How_Tests">🔧 Testing </h4>
@@ -153,6 +153,11 @@ http://localhost:1234/apidoc/swagger
 ```
 python3 -m pytest test
 ```
+          
+> **_NOTE:_** This command must be run in the root of the project.
+
+          
+          
 
 <h1 id="Notes"> Author's Notes </h1>
 
