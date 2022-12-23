@@ -103,6 +103,9 @@ sudo pip install -r requirements.txt
 
 <h3> 4️⃣ Start the API </h3>
 
+> **_NOTE:_** If you are on windows run python app.py
+
+
 ```
 python3 app.py
 ```
