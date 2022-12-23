@@ -28,7 +28,7 @@ def test_insert_repeated_message():
         "votes": 0,
     }
     second_request = post(BASE_URL, json={"text": "Waiting Silence by Angra"})
-    assert second_request.status_code == 402 and second_request.json() == {
+    assert second_request.status_code == 409 and second_request.json() == {
         "message": "Message alredy exists!"
     }
     ClearDatabase()
