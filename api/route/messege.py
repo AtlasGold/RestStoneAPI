@@ -21,7 +21,7 @@ def SearchAllMessages():
 
 @server.get("/messages/<int:id>")
 @spec.validate(resp=Response(HTTP_200=MessageOut))
-def SearchMessagesById(id:int):
+def SearchMessagesById(id: int):
     """Get All Messages by Id."""
     try:
         Message = database.search(Query().id == id)[0]
@@ -32,7 +32,7 @@ def SearchMessagesById(id:int):
 
 @server.get("/messages/random/<int:votes>")
 @spec.validate(resp=Response(HTTP_200=MessageOut))
-def SearchMessagesByVotes(votes:int):
+def SearchMessagesByVotes(votes: int):
     """Get random messages with a minimum of votes."""
     try:
         Message = database.search(Query().votes >= votes)
@@ -58,32 +58,33 @@ def InsertMessage():
 
 @server.put("/messages/<int:id>")
 @spec.validate(body=Request(MessageIn), resp=Response(HTTP_200=MessageIn))
-def UpdateMessage(id:int):
+def UpdateMessage(id: int):
     """Alter an Message in Database."""
     body = request.context.body.dict()
 
-    if(database.search(Query().id ==id) == []):
+    if database.search(Query().id == id) == []:
         return {"message": "Message doesn't exists!"}, 404
     elif database.search(Query().text == request.context.body.text):
         return {"message": "The message is the same!"}, 409
     else:
         database.update(body, Query().id == id)
-        return jsonify(body),200
+        return jsonify(body), 200
+
 
 @server.delete("/messages/<int:id>")
 @spec.validate(resp=Response("HTTP_204"))
-def DeleteMessage(id:int):
+def DeleteMessage(id: int):
     """Remove an Message of Database."""
     body = database.remove(Query().id == id)
-    if (body == []):
-        return jsonify({"message":"Message Not Found"}),404
+    if body == []:
+        return jsonify({"message": "Message Not Found"}), 404
     else:
-        return jsonify({}),204
+        return jsonify({}), 204
 
 
 @server.patch("/messages/<int:id>")
 @spec.validate()
-def Vote(id:int):
+def Vote(id: int):
     """Vote for the Message."""
     Messages = database.search(Query().id == id)
     if len(Messages) > 0:
