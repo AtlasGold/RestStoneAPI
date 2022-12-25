@@ -50,10 +50,10 @@
    </ul>
  <h4>🔧 Setup </h4>
     <ol>
-      <h3>1️⃣ Download image from DockerHub<h3>
+      <h3>1️⃣ Download image from DockerHub</h3>
       
  
-     docker push atlasgold31/api-crud-flask
+     docker pull atlasgold31/api-crud-flask
 
  <h3> 2️⃣ Start the container</h3>
      
@@ -86,7 +86,7 @@ git clone https://github.com/AtlasGold/RestStoneAPI.git
 **SSH**
 
 ```
-git clone gitgit@github.com:AtlasGold/RestStoneAPI.git
+git clone git@github.com:AtlasGold/RestStoneAPI.git.git
 ```
 
 <h3> 2️⃣ Enter the folder</h3>
