@@ -33,7 +33,10 @@
  
  <h2 id ="Online">Online 🌏</h2>
 <h4>☁️  Hosted on AWS ☁️  </h4>
-<h2> <a href="54.164.155.178/apidoc/swagger">RestStoneAPI.com</a> </h2>
+
+> **_NOTE:_** Paste this link into your browser
+
+  ```ec2-54-164-155-178.compute-1.amazonaws.com/apidoc/swagger```
 
 <h5></h5>
 <h5> Set up an EC2 instance on AWS to host my API. Using nginx, bash and systemd scripts. <br>  I intend to keep the server running for a week, during the project evaluation period by Hashdex, closing the server on 12/30/2022 at 12:00</h5>
